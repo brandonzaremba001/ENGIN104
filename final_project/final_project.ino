@@ -46,14 +46,15 @@ void setup() {
   // Update the strip, to start they are all 'off'
   strip.show();
 
-  // Start up pattern
-  intro();
 }
 
 void loop() {
   // Reset indicator lights
   for(int j = 8;j <= 12; j++) {
     digitalWrite(j,LOW);}
+
+    // Start up pattern
+    intro();
 
   // Set winner parameter
   winner = true;
@@ -62,7 +63,7 @@ void loop() {
   for(level = 0; level < 5; level++) {
 
     // Generate Random "target" location
-    rando = random(1,nLEDs - 1);
+    rando = random(2,nLEDs - 1);
     
     // set break condition
     endlevel = false;
@@ -151,7 +152,11 @@ void game(uint32_t c, uint8_t wait,int rand) {
 
 //                  Intro graphic
 void intro() {
-  colorWipe(strip.Color(  0, 127,   0), 50);
+  colorWipe(strip.Color(  0, 0,   127), 50);
+  while(digitalRead(4) == HIGH) {
+    delay(50);
+  }
+  delay(500);
 }
 
 //                  Winning graphic
